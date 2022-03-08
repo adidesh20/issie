@@ -434,6 +434,26 @@ let viewRowAsData (row: TruthTableRow) =
         |> List.toSeq
     tr [] cells
         
+let viewHideSwitches (table:TruthTable) hiddenIOs =
+    let makeSwitch (io: CellIO) =
+        let switchId = "switch-" + io.getFullName
+        Switch.switch 
+            [Switch.IsRounded; Switch.Id switchId] 
+            [str io.getLabel]
+
+    if table.TableMap.IsEmpty then
+            div [] [str "Truth Table has no rows"]
+    else
+        let preamble = str "Hide or Un-hide output/viewer columns in the Truth Table 
+            by toggling the corresponding switch."
+        let switches =
+            table.TableMap
+            |> Map.toList
+            |> List.head
+            |> snd
+            |> List.map (fun cell -> makeSwitch cell.IO)
+        div [ClassName "block"] (preamble::switches)
+
 let viewTruthTableError simError =
     let error = 
         match simError.InDependency with
@@ -599,10 +619,15 @@ let viewTruthTable model dispatch =
             match tableopt with
             | Error _ -> div [] []
             | Ok _ -> div [] [hr []; viewConstraints model dispatch]
+        let hideSwitches =
+            match tableopt with
+            | Error _ -> div [] []
+            | Ok table ->  viewHideSwitches table model.TTHiddenColumns
         
         let menu = 
             Menu.menu []  [
                 makeMenuGroup false "Filter" [constraints; br [] ; hr []]
+                makeMenuGroup false "Hide/Un-hide columns" [hideSwitches; br []; hr []]
                 makeMenuGroup true "Truth Table" [body; br []; hr []]
             ]    
 
@@ -613,11 +638,5 @@ let viewTruthTable model dispatch =
             br []; br []
             str "The Truth Table generator uses the diagram as it was at the moment of
                  pressing the \"Generate Truth Table\" button."
-            // constraints
-            // br []
-            // hr []
-            // body
-            // br []
-            // hr []
             menu
             ]

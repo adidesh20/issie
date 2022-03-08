@@ -85,14 +85,14 @@ NUGET
     Fulma (2.10)
       Fable.Core (>= 3.0) - restriction: >= netstandard2.0
       Fable.React (>= 5.1) - restriction: >= netstandard2.0
-    Fulma.Extensions.Wikiki.Tooltip (3.0)
-      Fable.Core (>= 3.0) - restriction: >= netstandard2.0
-      Fable.React (>= 5.1) - restriction: >= netstandard2.0
-      Fulma (>= 2.3) - restriction: >= netstandard2.0
     Fulma.Extensions.Wikiki.Switch (2.0.2)
       Fable.Core (>= 3.0)
       Fable.React (>= 5.1)
       Fulma (>= 2.1.1)
+    Fulma.Extensions.Wikiki.Tooltip (3.0)
+      Fable.Core (>= 3.0) - restriction: >= netstandard2.0
+      Fable.React (>= 5.1) - restriction: >= netstandard2.0
+      Fulma (>= 2.3) - restriction: >= netstandard2.0
     Thoth.Json (5.1) - restriction: >= netstandard2.0
       Fable.Core (>= 3.1.6) - restriction: >= netstandard2.0
       FSharp.Core (>= 4.7.2) - restriction: >= netstandard2.0

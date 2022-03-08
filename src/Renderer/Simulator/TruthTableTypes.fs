@@ -23,6 +23,10 @@ type CellIO =
         match this with
         | SimIO (_,_,w) -> w
         | Viewer ((_,_),w) -> w
+    member this.getFullName =
+        match this with
+        | SimIO (_,l,_) -> string l
+        | Viewer ((_,f),_) -> f
 
 type TruthTableCell = {
     IO: CellIO
